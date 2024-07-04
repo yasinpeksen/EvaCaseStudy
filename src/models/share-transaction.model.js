@@ -11,13 +11,17 @@ export default (sequelize) => {
         primaryKey: true,
         autoIncrement: true,
       },
+      type: {
+        type: DataTypes.ENUM("BUY", "SELL"),
+        allowNull: false,
+      },
       amount: {
         type: DataTypes.DOUBLE,
         allowNull: false,
         min: 0,
       },
       priceAt: {
-        type: DataTypes.DECIMAL,
+        type: DataTypes.DECIMAL(14, 2),
         allowNull: false,
         min: 0,
       },

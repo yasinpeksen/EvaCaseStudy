@@ -1,5 +1,5 @@
-export class ValidationException extends Error {
-  name = "Validation Exception";
+export class NotEnoughException extends Error {
+  name = "Not Enough Exception";
   constructor(message) {
     super(message);
     this.message = message;

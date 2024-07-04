@@ -25,7 +25,6 @@ export function setUp(models) {
   Portfolio.belongsTo(models.Users);
   Portfolio.hasMany(models.ShareTransactions);
   Portfolio.hasOne(models.PortfolioShares);
-  Portfolio.hasOne(models.ShareRates);
 }
 
 export { Portfolio };

@@ -28,7 +28,7 @@ export async function setUp(sequelize) {
     module.setUp(models);
   }
 
-  sequelize.sync();
+  await sequelize.sync({ force: true });
 
   return models;
 }

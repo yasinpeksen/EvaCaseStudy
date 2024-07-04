@@ -1,13 +1,11 @@
 import { Router } from "express";
+import { apiErrorHandler } from "../utils/api-error-handler.js";
+import { buyShare, sellShare } from "../controllers/trade.controller.js";
 
 const tradeRoute = Router();
 
-tradeRoute.post("/buy", (req, res) => {
-  res.send("BUY");
-});
+tradeRoute.post("/buy", apiErrorHandler(buyShare));
 
-tradeRoute.post("/sell", (req, res) => {
-  res.send("SELL");
-});
+tradeRoute.post("/sell", apiErrorHandler(sellShare));
 
 export { tradeRoute };

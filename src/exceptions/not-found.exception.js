@@ -1,4 +1,4 @@
-class NotFoundException extends Error {
+export class NotFoundException extends Error {
   name = "Not Found Exception";
   constructor(message) {
     super(message);

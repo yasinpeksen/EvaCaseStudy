@@ -44,7 +44,6 @@ export default (sequelize) => {
 export function setUp(models) {
   Share.hasMany(models.ShareTransactions);
   Share.hasOne(models.PortfolioShares);
-  Share.hasOne(models.ShareRates);
 }
 
 export { Share };

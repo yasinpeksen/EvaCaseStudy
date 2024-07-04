@@ -33,9 +33,6 @@ export default (sequelize) => {
   return ShareRate;
 };
 
-export function setUp(models) {
-  ShareRate.belongsTo(models.Shares);
-  ShareRate.belongsTo(models.Portfolios);
-}
+export function setUp(models) {}
 
 export { ShareRate };
