@@ -1,7 +1,7 @@
 import { Model, DataTypes } from "sequelize";
 import { User } from "./user.model";
-import { ShareTransaction } from "./share_transaction.model";
-import { PortfolioShare } from "./portfolio_share.model";
+import { ShareTransaction } from "./share-transaction.model";
+import { PortfolioShare } from "./portfolio-share.model";
 
 class Portfolio extends Model {}
 

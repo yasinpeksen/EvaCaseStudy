@@ -1,5 +1,5 @@
 import { Model, DataTypes } from "sequelize";
-import { PortfolioShare } from "./portfolio_share.model";
+import { PortfolioShare } from "./portfolio-share.model";
 
 class Share extends Model {}
 
