@@ -83,12 +83,6 @@ async function calculateAllTransactions(symbol) {
     where: { shareSymbol: symbol, type: "SELL" },
   });
 
-  console.log(await ShareTransaction.findAll({}));
-
-  console.log("calculatedTransactions");
-  console.log(symbol);
-  console.log(shareBoughtTransactions, shareSoldTransactions);
-
   return shareBoughtTransactions - shareSoldTransactions;
 }
 

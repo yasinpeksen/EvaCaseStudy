@@ -11,9 +11,6 @@ export async function updateRate(symbol, rate) {
   }
 
   const updatedAt = shareRate.updatedAt;
-  console.log("UPDATEDDDD ATT:");
-  console.log(moment(updatedAt));
-  console.log(moment().subtract(1, "hour"));
 
   // if it has been 1 hour or more from last update
   if (moment().subtract(1, "hour") < moment(updatedAt)) {
