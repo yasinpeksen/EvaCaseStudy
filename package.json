@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/sequelize": "^4.28.20",
     "errorhandler": "^1.5.1",
     "express": "^4.19.2",
     "express-interceptor": "^1.2.0",
