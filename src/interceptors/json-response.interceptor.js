@@ -1,6 +1,6 @@
 import interceptor from "express-interceptor";
 
-export const json_interceptor = interceptor((req, res) => {
+export const jsonInterceptor = interceptor((req, res) => {
   return {
     isInterceptable: true,
     intercept: function (body, send) {

@@ -21,7 +21,7 @@ export default (sequelize) => {
         allowNull: false,
         min: 0,
       },
-      price_at: {
+      priceAt: {
         type: DataTypes.DECIMAL,
         allowNull: false,
         min: 0,

@@ -28,7 +28,7 @@ export default (sequelize) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      max_amount: {
+      maxAmount: {
         type: DataTypes.DOUBLE,
         allowNull: false,
         min: 0,

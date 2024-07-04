@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { trade_route } from "./trade.route";
-import { share_route } from "./share.route";
+import { tradeRoute } from "./trade.route";
+import { shareRoute } from "./share.route";
 
-const default_route = Router();
+const defaultRoute = Router();
 
-default_route.use("/trade", trade_route);
-default_route.use("/share", share_route);
+defaultRoute.use("/trade", tradeRoute);
+defaultRoute.use("/share", shareRoute);
 
-export default default_route;
+export default defaultRoute;
