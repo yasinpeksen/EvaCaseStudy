@@ -11,6 +11,7 @@
   "dependencies": {
     "errorhandler": "^1.5.1",
     "express": "^4.19.2",
+    "express-interceptor": "^1.2.0",
     "sequelize": "^6.37.3",
     "sqlite3": "^5.1.7"
   },
