@@ -1,5 +1,5 @@
-import * as shareService from "../services/share.service";
-import shareUpdateSchema from "../validations/share-update-request.schema";
+import * as shareService from "../services/share.service.js";
+import shareUpdateSchema from "../validations/share-update-request.schema.js";
 
 function updatePrice(req, res) {
   const { error, value } = shareUpdateSchema.validate(req.body);

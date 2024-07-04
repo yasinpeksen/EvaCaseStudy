@@ -1,15 +1,8 @@
 import { Model, DataTypes } from "sequelize";
-import { User } from "./user.model";
-import { ShareTransaction } from "./share-transaction.model";
-import { PortfolioShare } from "./portfolio-share.model";
 
 class Portfolio extends Model {}
 
 export default (sequelize) => {
-  Portfolio.belongsTo(User);
-  Portfolio.hasMany(ShareTransaction);
-  Portfolio.hasOne(PortfolioShare);
-
   Portfolio.init(
     {
       id: {
@@ -27,5 +20,12 @@ export default (sequelize) => {
 
   return Portfolio;
 };
+
+export function setUp(models) {
+  Portfolio.belongsTo(models.Users);
+  Portfolio.hasMany(models.ShareTransactions);
+  Portfolio.hasOne(models.PortfolioShares);
+  Portfolio.hasOne(models.ShareRates);
+}
 
 export { Portfolio };

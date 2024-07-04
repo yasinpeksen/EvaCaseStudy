@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { tradeRoute } from "./trade.route";
-import { shareRoute } from "./share.route";
+import { tradeRoute } from "./trade.route.js";
+import { shareRoute } from "./share.route.js";
 
 const defaultRoute = Router();
 

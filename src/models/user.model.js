@@ -1,11 +1,8 @@
 import { Model, DataTypes } from "sequelize";
-import { Portfolio } from "./portfolio";
 
 class User extends Model {}
 
 export default (sequelize) => {
-  User.hasMany(Portfolio);
-
   User.init(
     {
       id: {
@@ -17,6 +14,7 @@ export default (sequelize) => {
       username: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
         validate: {
           notNull: true,
           notEmpty: true,
@@ -32,5 +30,9 @@ export default (sequelize) => {
 
   return User;
 };
+
+export function setUp(models) {
+  User.hasMany(models.Portfolios);
+}
 
 export { User };

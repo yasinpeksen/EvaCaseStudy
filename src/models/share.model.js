@@ -1,12 +1,8 @@
 import { Model, DataTypes } from "sequelize";
-import { PortfolioShare } from "./portfolio-share.model";
 
 class Share extends Model {}
 
 export default (sequelize) => {
-  Share.hasMany(ShareTransaction);
-  Share.hasOne(PortfolioShare);
-
   Share.init(
     {
       symbol: {
@@ -28,6 +24,8 @@ export default (sequelize) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
+
+      // Can have decimal value too
       maxAmount: {
         type: DataTypes.DOUBLE,
         allowNull: false,
@@ -42,5 +40,11 @@ export default (sequelize) => {
 
   return Share;
 };
+
+export function setUp(models) {
+  Share.hasMany(models.ShareTransactions);
+  Share.hasOne(models.PortfolioShares);
+  Share.hasOne(models.ShareRates);
+}
 
 export { Share };

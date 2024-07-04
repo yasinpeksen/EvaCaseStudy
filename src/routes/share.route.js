@@ -2,7 +2,7 @@ import { Router } from "express";
 
 const shareRoute = Router();
 
-shareRoute.update("/", (req, res) => {
+shareRoute.put("/:id", (req, res) => {
   res.send("Update on hourly basis with admin security");
 });
 

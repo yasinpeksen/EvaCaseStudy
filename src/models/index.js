@@ -1,27 +1,34 @@
 import fs from "fs";
 import path from "path";
-import Sequelize from "sequelize";
+import { fileURLToPath } from "url";
 
-const basename = path.basename(__filename);
+export async function setUp(sequelize) {
+  const filename = fileURLToPath(import.meta.url); // get the resolved path to the file
+  const dirname = path.dirname(filename); // get the name of the directory
+  const basename = path.basename(filename);
+  const models = {};
 
-const sequelize = new Sequelize.Sequelize({
-  dialect: "sqlite",
-  storage: "database.sqlite",
-});
-
-fs.readdirSync(__dirname)
-  .filter((filename) => {
+  const imports = fs.readdirSync(dirname).filter((file) => {
     return (
-      filename.length() > 3 &&
-      filename.indexOf(".") !== 0 &&
-      filename !== basename &&
-      filename.slice(-3) === ".js"
+      file.length > 3 &&
+      file.indexOf(".") > 0 &&
+      file !== basename &&
+      file.slice(-3) === ".js"
     );
-  })
-  .forEach((filename) => {
-    require(path.join(__dirname, filename))(sequelize);
   });
 
-sequelize.sync();
+  for (const file of imports) {
+    const module = await import(path.join("file://", dirname, file));
+    const model = module.default(sequelize);
+    models[model.getTableName()] = model;
+  }
 
-export { sequelize, Sequelize };
+  for (const file of imports) {
+    const module = await import(path.join("file://", dirname, file));
+    module.setUp(models);
+  }
+
+  sequelize.sync();
+
+  return models;
+}

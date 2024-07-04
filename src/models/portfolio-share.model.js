@@ -1,13 +1,8 @@
 import { Model, DataTypes } from "sequelize";
-import { Portfolio } from "./portfolio";
-import { Share } from "./share.model";
 
 class PortfolioShare extends Model {}
 
 export default (sequelize) => {
-  PortfolioShare.belongsTo(Portfolio);
-  PortfolioShare.belongsTo(Share);
-
   PortfolioShare.init(
     {
       amount: {
@@ -26,5 +21,10 @@ export default (sequelize) => {
 
   return PortfolioShare;
 };
+
+export function setUp(models) {
+  PortfolioShare.belongsTo(models.Portfolios);
+  PortfolioShare.belongsTo(models.Shares);
+}
 
 export { PortfolioShare };

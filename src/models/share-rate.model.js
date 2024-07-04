@@ -1,14 +1,9 @@
 import { Model, DataTypes } from "sequelize";
-import { Share } from "./share.model";
-import { Portfolio } from "./portfolio";
 
-class SharePrice extends Model {}
+class ShareRate extends Model {}
 
 export default (sequelize) => {
-  SharePrice.belongsTo(Share);
-  SharePrice.belongsTo(Portfolio);
-
-  SharePrice.init(
+  ShareRate.init(
     {
       symbol: {
         type: DataTypes.CHAR,
@@ -21,19 +16,26 @@ export default (sequelize) => {
           len: [3, 3],
         },
       },
-      price: {
-        type: DataTypes.DECIMAL,
+      rate: {
+        type: DataTypes.DECIMAL(14, 2),
         allowNull: false,
-        min: 0,
+        validate: {
+          min: 0,
+        },
       },
     },
     {
       sequelize,
-      modelName: "SharePrice",
+      modelName: "ShareRate",
     }
   );
 
-  return SharePrice;
+  return ShareRate;
 };
 
-export { SharePrice };
+export function setUp(models) {
+  ShareRate.belongsTo(models.Shares);
+  ShareRate.belongsTo(models.Portfolios);
+}
+
+export { ShareRate };
