@@ -117,7 +117,7 @@ async function createShareTransaction(
       transaction: dbTransaction,
     });
 
-    if (portfolioShare.amount < amount) {
+    if (type === "SELL" && portfolioShare.amount < amount) {
       throw new NotEnoughException(
         `Not enough shares left to sell. You can only sell ${portfolioShare.amount} shares.`
       );
