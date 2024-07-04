@@ -11,17 +11,20 @@ export async function updateRate(symbol, rate) {
   }
 
   const updatedAt = shareRate.updatedAt;
+  console.log("UPDATEDDDD ATT:");
+  console.log(moment(updatedAt));
+  console.log(moment().subtract(1, "hour"));
 
   // if it has been 1 hour or more from last update
-  if (moment().subtract(1, "hour") <= moment(updatedAt)) {
-    shareRate.rate = rate;
-    await shareRate.save();
-    return "Success";
+  if (moment().subtract(1, "hour") < moment(updatedAt)) {
+    throw new TooEarlyException(
+      "You have to wait an hour before updating share rate again"
+    );
   }
 
-  throw new TooEarlyException(
-    "You have to wait an hour before updating share rate again"
-  );
+  shareRate.rate = rate;
+  await shareRate.save();
+  return "Success";
 }
 
 export async function getShares() {
