@@ -2,6 +2,7 @@ import { arbitraryAppKey } from "../config/config.js";
 import * as shareService from "../services/share.service.js";
 import shareUpdateSchema from "../validations/share-update-request.schema.js";
 import { UnauthorizedException } from "../exceptions/unaothorized.exception.js";
+import { validateInput } from "../utils/validate-input.js";
 
 export async function updateRate(req, res) {
   if (
@@ -13,11 +14,11 @@ export async function updateRate(req, res) {
   }
 
   const value = validateInput(shareUpdateSchema, {
-    symbol: req.params.get("symbol"),
-    rate: req.body.get("rate"),
+    symbol: req.params["symbol"],
+    rate: req.body["rate"],
   });
 
-  const result = await shareService.updateRate(value.symbol, value.price);
+  const result = await shareService.updateRate(value.symbol, value.rate);
   res.send(result);
 }
 

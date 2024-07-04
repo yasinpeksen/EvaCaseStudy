@@ -1,5 +1,6 @@
 import express from "express";
 import { config } from "dotenv";
+import bodyParser from "body-parser";
 import routes from "./routes/default.route.js";
 import { jsonInterceptor } from "./interceptors/json-response.interceptor.js";
 import { DB } from "./config/db.js";
@@ -11,6 +12,7 @@ config();
 const app = express();
 const port = 3000;
 
+app.use(bodyParser.json({ extended: true }));
 app.use(jsonInterceptor);
 
 app.use(routes);
