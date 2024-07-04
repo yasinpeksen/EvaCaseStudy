@@ -25,3 +25,8 @@ export async function sellShare(req, res) {
 
   res.send(result);
 }
+
+export async function getShareTransactions(req, res) {
+  const result = await tradeService.getShareTransactions();
+  res.send(result);
+}

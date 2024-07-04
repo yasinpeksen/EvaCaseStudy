@@ -119,7 +119,7 @@ async function createShareTransaction(
 
     if (type === "SELL" && portfolioShare.amount < amount) {
       throw new NotEnoughException(
-        `Not enough shares left to sell. You can only sell ${portfolioShare.amount} shares.`
+        `Not enough shares left to sell. You only have ${portfolioShare.amount} shares to sell.`
       );
     }
 
@@ -148,4 +148,8 @@ async function createShareTransaction(
     await dbTransaction.rollback();
     throw error;
   }
+}
+export async function getShareTransactions() {
+  const shareTransactions = await ShareTransaction.findAll();
+  return shareTransactions;
 }
