@@ -34,6 +34,7 @@ export async function buyShare(portfolioId, symbol, amount) {
     "BUY",
     amount,
     shareRate.rate,
+    symbol,
     portfolioId
   );
 
@@ -67,6 +68,7 @@ export async function sellShare(portfolioId, symbol, amount) {
     "SELL",
     amount,
     shareRate.rate,
+    symbol,
     portfolioId
   );
 
@@ -74,14 +76,18 @@ export async function sellShare(portfolioId, symbol, amount) {
 }
 
 async function calculateAllTransactions(symbol) {
-  const shareBoughtTransactions =
-    (await ShareTransaction.sum("amount", {
-      where: { shareSymbol: symbol, type: "BUY" },
-    })) || 0;
-  const shareSoldTransactions =
-    (await ShareTransaction.sum("amount", {
-      where: { shareSymbol: symbol, type: "SELL" },
-    })) || 0;
+  const shareBoughtTransactions = await ShareTransaction.sum("amount", {
+    where: { shareSymbol: symbol, type: "BUY" },
+  });
+  const shareSoldTransactions = await ShareTransaction.sum("amount", {
+    where: { shareSymbol: symbol, type: "SELL" },
+  });
+
+  console.log(await ShareTransaction.findAll({}));
+
+  console.log("calculatedTransactions");
+  console.log(symbol);
+  console.log(shareBoughtTransactions, shareSoldTransactions);
 
   return shareBoughtTransactions - shareSoldTransactions;
 }
@@ -102,8 +108,8 @@ async function createShareTransaction(
   try {
     const [portfolioShare, _] = await PortfolioShare.findOrCreate({
       where: {
-        portfolioId: portfolioId,
-        shareSymbol: shareSymbol,
+        PortfolioId: portfolioId,
+        ShareSymbol: shareSymbol,
       },
       defaults: {
         amount: 0,
@@ -122,8 +128,8 @@ async function createShareTransaction(
         type: type,
         amount: amount,
         priceAt: priceAt,
-        shareSymbol: shareSymbol,
-        portfolioId: portfolioId,
+        ShareSymbol: shareSymbol,
+        PortfolioId: portfolioId,
       },
       {
         transaction: dbTransaction,
